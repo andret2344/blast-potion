@@ -15,44 +15,29 @@ import org.bukkit.potion.PotionType;
 import java.util.Arrays;
 
 public class atsTNTPotion extends JavaPlugin {
-    private static ItemStack tnt;
-    private static FileConfiguration config;
-    private static atsTNTPotion instance;
+    private final ItemStack tnt = new ItemStack(Material.SPLASH_POTION, 1);
+    private final Listener listener = new TNTPotionListeners(this);
 
     @Override
     public void onEnable() {
-        atsTNTPotion.instance = this;
-        atsTNTPotion.config = getConfig();
-        atsTNTPotion.config.addDefault("name", "&5ThrowableTNT");
-        atsTNTPotion.config.addDefault("desc", "&2Throw it\r&2to explode!");
-        atsTNTPotion.config.addDefault("explode-power", 3.25);
-        atsTNTPotion.config.options().copyDefaults(true);
-        saveConfig();
-        atsTNTPotion.tnt = new ItemStack(Material.SPLASH_POTION, 1);
-        PotionMeta potionMeta = (PotionMeta) atsTNTPotion.tnt.getItemMeta();
+        saveDefaultConfig();
+        PotionMeta potionMeta = (PotionMeta) tnt.getItemMeta();
         potionMeta.setBasePotionData(new PotionData(PotionType.INSTANT_DAMAGE, false, false));
-        atsTNTPotion.tnt.setItemMeta(potionMeta);
-        ItemMeta meta = atsTNTPotion.tnt.getItemMeta();
-        meta.setDisplayName(((String) atsTNTPotion.config.get("name")).replace('&', '�'));
-        String[] lore = ((String) atsTNTPotion.config.get("desc")).replace('&', '�').split("\r");
-        meta.setLore(Arrays.asList(lore));
-        atsTNTPotion.tnt.setItemMeta(meta);
-        ShapedRecipe shapedRecipe = new ShapedRecipe(new NamespacedKey(this, "potion"), atsTNTPotion.tnt);
+        potionMeta.setDisplayName(((String) getConfig().get("name")).replace('&', '§'));
+        String[] lore = ((String) getConfig().get("desc")).replace('&', '§').split("\r");
+        potionMeta.setLore(Arrays.asList(lore));
+        tnt.setItemMeta(potionMeta);
+        ShapedRecipe shapedRecipe = new ShapedRecipe(new NamespacedKey(this, "potion"), tnt);
         shapedRecipe.shape("@!@", " # ", " $ ");
         shapedRecipe.setIngredient('@', Material.NETHER_STALK);
         shapedRecipe.setIngredient('!', Material.GOLD_BLOCK);
         shapedRecipe.setIngredient('#', Material.TNT);
         shapedRecipe.setIngredient('$', Material.ARROW);
         Bukkit.getServer().addRecipe(shapedRecipe);
-        Bukkit.getPluginManager().registerEvents(new TNTPotionListeners(), this);
     }
 
-    public static ItemStack getTNT() {
-        return atsTNTPotion.tnt;
-    }
-
-    public static atsTNTPotion getInstance() {
-        return atsTNTPotion.instance;
+    public ItemStack getTNT() {
+        return tnt;
     }
 
 }
