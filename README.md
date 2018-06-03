@@ -1,3 +1,14 @@
 # atsTNTPotion
 
-The plugin allows to craft an splash potion that will explode once thrown. You can adjust the explosion power in the plugin's config file.
+The plugin allows to craft the splash potion, that explodes once it hits anything with set power of explosion.
+
+## Details 
+You can define any amount of potions in the `config.yml` file. You are able to configure the potion item as a `ItemStack`, what means you can set it's name and lore. Additionally you can set the explosion power, and own crafting recipe (they **have to** be unique)!
+
+An example config that includes a potion is present as a default config.
+
+## Downloading
+You can download the plugin from here: [atTNTPotion](https://ats.andret.eu/atsTNTPotion-2.0.jar "Download from thrusted source!")
+
+## Contributing
+If you wish to contribute it with me, just send the join request :)
