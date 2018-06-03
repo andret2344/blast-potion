@@ -8,7 +8,7 @@ You can define any amount of potions in the `config.yml` file. You are able to c
 An example config that includes a potion is present as a default config.
 
 ## Downloading
-You can download the plugin from here: [atTNTPotion](https://ats.andret.eu/atsTNTPotion-2.0.jar "Download from thrusted source!")
+You can download the plugin from here: [atsTNTPotion](https://ats.andret.eu/atsTNTPotion-2.0.jar "Download from thrusted source!")
 
 ## Contributing
 If you wish to contribute it with me, just send the join request :)
