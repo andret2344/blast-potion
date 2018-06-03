@@ -1,0 +1,17 @@
+potions:
+  - explosion-power: 3.25
+    item:
+      name: '&5ThrowableTNT'
+      lore:
+        - '&2Throw it'
+        - '&2to explode!'
+    crafting:
+      shape:
+        - 'NGN'
+        - ' T '
+        - ' A '
+      mapping:
+        'N': NETHER_STALK
+        'G': GOLD_BLOCK
+        'T': TNT
+        'A': ARROW
