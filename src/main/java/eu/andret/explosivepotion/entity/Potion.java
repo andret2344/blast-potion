@@ -1,10 +1,10 @@
-package eu.andret.tntpotion;
+package eu.andret.explosivepotion.entity;
 
 import lombok.Value;
 import org.bukkit.inventory.ItemStack;
 
 @Value
-public class TNTPotion {
+public class Potion {
     private ItemStack potion;
     private double explosionPower;
 }

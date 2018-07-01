@@ -2,7 +2,7 @@ apply plugin: "java"
 apply plugin: "idea"
 
 jar {
-    baseName = "atsTNTPotion"
+    baseName = "atsExplosivePotion"
     version = "2.0"
 }
 
@@ -14,5 +14,5 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
-    compileOnly group: "org.projectlombok", name: "lombok", version: "1.16.20"
+    compileOnly 'org.projectlombok:lombok:1.18.0'
 }
