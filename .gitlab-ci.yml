@@ -1,11 +1,17 @@
-stages:
- - build
+image: gradle:alpine
 
-build:
-  image: gradle:latest
+stages:
+  - build
+
+compile:
   stage: build
   script:
-    - gradle clean build
+    - gradle compileJava
+
+delombok:
+  stage: build
+  script:
+    - gradle delombok
   artifacts:
     paths:
-      - build/libs/*.jar
+      - build/delombok/**
