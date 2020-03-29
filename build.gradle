@@ -26,7 +26,7 @@ sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
 tasks.withType(JavaCompile) {
-	options.compilerArgs << '-Xlint:unchecked'
+	options.compilerArgs << '-Xlint:unchecked' << '-parameters' << '-g'
 	options.deprecation = true
 }
 
@@ -71,4 +71,3 @@ spigot {
 
 build.dependsOn(shadowJar)
 
-compileJava.options.compilerArgs << '-parameters' << '-g'

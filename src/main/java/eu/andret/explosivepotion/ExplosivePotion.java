@@ -37,6 +37,9 @@ public class ExplosivePotion extends JavaPlugin {
 				.forEach(current -> {
 					ItemStack potion = new ItemStack(Material.SPLASH_POTION);
 					PotionMeta itemMeta = (PotionMeta) potion.getItemMeta();
+					if (itemMeta == null) {
+						return;
+					}
 					itemMeta.setBasePotionData(new PotionData(PotionType.UNCRAFTABLE, false, false));
 					itemMeta.setDisplayName(current.getString("item.name").replace('&', '\u00A7'));
 					itemMeta.setLore(current.getStringList("item.lore").stream().map(s -> s.replace('&', '\u00A7')).collect(Collectors.toList()));
