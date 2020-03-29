@@ -18,8 +18,8 @@ apply plugin: "idea"
 apply plugin: 'io.franzbecker.gradle-lombok'
 
 jar {
-	setArchiveBaseName pluginName
-	setArchiveVersion pluginVersion
+	setArchiveBaseName project.name
+	setArchiveVersion project.version
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -33,7 +33,7 @@ tasks.withType(JavaCompile) {
 repositories {
 	mavenCentral()
 	mavenLocal()
-	maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots' }
+	spigot()
 }
 
 dependencies {
@@ -55,7 +55,8 @@ task delombok(type: DelombokTask, dependsOn: compileJava) {
 }
 
 shadowJar {
-	setArchiveFileName "${pluginName}-${pluginVersion}.jar"
+	print project
+	setArchiveFileName "${project.name}-${project.version}.jar"
 	relocate 'org.json', 'eu.andret.json'
 	configurations = [project.configurations.runtime]
 }
@@ -65,8 +66,6 @@ spigot {
 	apiVersion = '1.15'
 	load = POST_WORLD
 	description = 'A plugin that allows to craft the potion that explodes on a throw.'
-	version = pluginVersion
-	name = pluginName
 }
 
 build.dependsOn(shadowJar)
