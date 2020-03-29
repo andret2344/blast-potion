@@ -17,18 +17,8 @@ apply plugin: "java"
 apply plugin: "idea"
 apply plugin: 'io.franzbecker.gradle-lombok'
 
-jar {
-	setArchiveBaseName project.name
-	setArchiveVersion project.version
-}
-
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
-
-tasks.withType(JavaCompile) {
-	options.compilerArgs << '-Xlint:unchecked' << '-parameters' << '-g'
-	options.deprecation = true
-}
 
 repositories {
 	mavenCentral()
@@ -44,6 +34,25 @@ dependencies {
 	annotationProcessor group: "org.projectlombok", name: "lombok", version: "1.18.12"
 }
 
+tasks.withType(JavaCompile) {
+	options.compilerArgs << '-Xlint:unchecked' << '-parameters' << '-g'
+	options.deprecation = true
+}
+
+spigot {
+	authors = ['Andret']
+	apiVersion = '1.15'
+	description = 'A plugin that allows to craft the potion that explodes on a throw.'
+}
+
+shadowJar {
+	setArchiveFileName "${project.name}-${project.version}.jar"
+	relocate 'org.json', 'eu.andret.json'
+	configurations = [project.configurations.runtime]
+}
+
+build.dependsOn(shadowJar)
+
 task delombok(type: DelombokTask, dependsOn: compileJava) {
 	ext.outputDir = file("$buildDir/delombok")
 	outputs.dir(outputDir)
@@ -53,19 +62,3 @@ task delombok(type: DelombokTask, dependsOn: compileJava) {
 	}
 	doFirst { outputDir.deleteDir() }
 }
-
-shadowJar {
-	setArchiveFileName "${project.name}-${project.version}.jar"
-	relocate 'org.json', 'eu.andret.json'
-	configurations = [project.configurations.runtime]
-}
-
-spigot {
-	authors = ['Andret']
-	apiVersion = '1.15'
-	load = POST_WORLD
-	description = 'A plugin that allows to craft the potion that explodes on a throw.'
-}
-
-build.dependsOn(shadowJar)
-
