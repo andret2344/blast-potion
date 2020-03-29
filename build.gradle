@@ -55,7 +55,6 @@ task delombok(type: DelombokTask, dependsOn: compileJava) {
 }
 
 shadowJar {
-	print project
 	setArchiveFileName "${project.name}-${project.version}.jar"
 	relocate 'org.json', 'eu.andret.json'
 	configurations = [project.configurations.runtime]
