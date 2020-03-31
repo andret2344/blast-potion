@@ -3,18 +3,18 @@ import io.franzbecker.gradle.lombok.task.DelombokTask
 buildscript {
 	repositories {
 		jcenter()
-		maven { url "https://plugins.gradle.org/m2/" }
+		maven { url 'https://plugins.gradle.org/m2/' }
 	}
 	dependencies { classpath 'io.franzbecker:gradle-lombok:2.0' }
 }
 
 plugins {
-	id "com.github.johnrengelman.shadow" version "5.2.0"
+	id 'com.github.johnrengelman.shadow' version '5.2.0'
 	id 'kr.entree.spigradle' version '1.2.1'
 }
 
-apply plugin: "java"
-apply plugin: "idea"
+apply plugin: 'java'
+apply plugin: 'idea'
 apply plugin: 'io.franzbecker.gradle-lombok'
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -28,10 +28,10 @@ repositories {
 
 dependencies {
 	compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.15.2-R0.1-SNAPSHOT'
-	compileOnly group: "org.projectlombok", name: "lombok", version: "1.18.12"
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
 	compile group: 'org.jetbrains', name: 'annotations', version: '16.0.2'
 	implementation group: 'org.json', name: 'json', version: '20190722'
-	annotationProcessor group: "org.projectlombok", name: "lombok", version: "1.18.12"
+	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
 }
 
 tasks.withType(JavaCompile) {
@@ -47,7 +47,7 @@ spigot {
 
 shadowJar {
 	setArchiveFileName "${project.name}-${project.version}.jar"
-	relocate 'org.json', 'eu.andret.json'
+	relocate 'org.json', 'eu.andret.explorivepotion.json'
 	configurations = [project.configurations.runtime]
 }
 
@@ -58,7 +58,7 @@ task delombok(type: DelombokTask, dependsOn: compileJava) {
 	outputs.dir(outputDir)
 	sourceSets.main.java.srcDirs.each {
 		inputs.dir(it)
-		args(it, "-d", outputDir)
+		args(it, '-d', outputDir)
 	}
 	doFirst { outputDir.deleteDir() }
 }
