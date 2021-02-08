@@ -48,12 +48,10 @@ public class ExplosivePotion extends JavaPlugin {
 					List<String> shape = current.getStringList("crafting.shape");
 					Map<Character, Material> mapping = new HashMap<>();
 					ConfigurationSection configurationSection = current.getConfigurationSection("crafting.mapping");
-					Objects.requireNonNull(configurationSection).getKeys(false).forEach(key -> {
-						Material mat = Material.getMaterial(Objects.requireNonNull(configurationSection.getString(key)));
-						if (mat != null) {
-							mapping.put(key.charAt(0), mat);
-						}
-					});
+					Objects.requireNonNull(configurationSection).getKeys(false).forEach(key -> Optional.of(key)
+							.map(configurationSection::getString)
+							.map(Material::getMaterial)
+							.ifPresent(material -> mapping.put(key.charAt(0), material)));
 					createRecipe(potion, shape, mapping);
 				});
 	}
