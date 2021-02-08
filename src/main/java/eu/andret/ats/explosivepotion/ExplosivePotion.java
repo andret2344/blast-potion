@@ -1,6 +1,6 @@
-package eu.andret.explosivepotion;
+package eu.andret.ats.explosivepotion;
 
-import eu.andret.explosivepotion.entity.Potion;
+import eu.andret.ats.explosivepotion.entity.Potion;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;

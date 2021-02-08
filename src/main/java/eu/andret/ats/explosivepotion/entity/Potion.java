@@ -1,4 +1,4 @@
-package eu.andret.explosivepotion.entity;
+package eu.andret.ats.explosivepotion.entity;
 
 import lombok.Value;
 import org.bukkit.inventory.ItemStack;

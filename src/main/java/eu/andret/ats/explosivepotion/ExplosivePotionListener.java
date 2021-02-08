@@ -1,4 +1,4 @@
-package eu.andret.explosivepotion;
+package eu.andret.ats.explosivepotion;
 
 import lombok.AllArgsConstructor;
 import org.bukkit.Location;
