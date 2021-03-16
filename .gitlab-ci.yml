@@ -14,6 +14,7 @@ stages:
   - build
   - verify
   - deploy
+  - broadcast
 
 wrapper:
   stage: prepare
@@ -84,14 +85,16 @@ jar:
     policy: pull
 
 badges:
-  stage: deploy
+  stage: broadcast
+  dependencies:
+    - junit
   script:
     - apt-get update
     - apt-get install python3 python3-pip --yes
     - pip3 install anybadge
-    - anybadge -l version -v "$(./gradlew version -q)" -f version.svg -c blue
-    - anybadge -l spigot -v "$(./gradlew spigotVersion -q)" -f spigot.svg -c blue
-    - anybadge -l atsArguments -v "$(./gradlew argumentsVersion -q)" -f arguments.svg -c blue
+    - anybadge -l version -v "$(./gradlew version -q)" -f version.svg -c "#007ec6"
+    - anybadge -l spigot -v "$(./gradlew spigotVersion -q)" -f spigot.svg -c "#007ec6"
+    - anybadge -l atsArguments -v "$(./gradlew argumentsVersion -q)" -f arguments.svg -c "#007ec6"
   artifacts:
     paths:
       - version.svg
