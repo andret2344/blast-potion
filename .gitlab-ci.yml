@@ -94,6 +94,7 @@ badges:
     - anybadge -l version -v $version -f version.svg -c blue
     - anybadge -l spigot -v $spigot -f spigot.svg -c blue
     - anybadge -l atsArguments -v $arguments -f arguments.svg -c blue
+    - ./gradlew build
   artifacts:
     paths:
       - version.svg
