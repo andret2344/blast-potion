@@ -86,11 +86,12 @@ jar:
 badges:
   stage: deploy
   image: python
-  before_script:
-    - pip install anybadge
   script:
-    - anybadge -l version -v "$(./gradlew version -q)" -f version.svg -c blue
-    - anybadge -l spigot -v "$(./gradlew spigot -q)" -f spigot.svg -c blue
+    - pip install anybadge
+    - version=$(./gradlew version -q)
+    - spigot=$(./gradlew spigot -q)
+    - anybadge -l version -v "$version" -f version.svg -c blue
+    - anybadge -l spigot -v "$spigot" -f spigot.svg -c blue
     - anybadge -l atsArguments -v "$(./gradlew atsArguments -q)" -f arguments.svg -c blue
   artifacts:
     paths:
