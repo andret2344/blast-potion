@@ -52,7 +52,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 		}
 
 		Optional.of(potionsSection)
-				.map(x -> x.getKeys(false))
+				.map(section -> section.getKeys(false))
 				.stream()
 				.flatMap(Collection::stream)
 				.map(potionsSection::getConfigurationSection)
