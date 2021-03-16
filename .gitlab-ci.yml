@@ -85,9 +85,10 @@ jar:
 
 badges:
   stage: deploy
-  image: python
   script:
-    - pip install anybadge
+    - apt install python3
+    - apt install python3-pip
+    - pip3 install anybadge
     - anybadge -l version -v "$(./gradlew version -q)" -f version.svg -c blue
     - anybadge -l spigot -v "$(./gradlew spigotVersion -q)" -f spigot.svg -c blue
     - anybadge -l atsArguments -v "$(./gradlew argumentsVersion -q)" -f arguments.svg -c blue
