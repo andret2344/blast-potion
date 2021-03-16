@@ -88,11 +88,9 @@ badges:
   image: python
   script:
     - pip install anybadge
-    - version="$(./gradlew version -q)"
-    - spigot="$(./gradlew spigot -q)"
-    - anybadge -l version -v "$version" -f version.svg -c blue
-    - anybadge -l spigot -v "$spigot" -f spigot.svg -c blue
-    - anybadge -l atsArguments -v "$(./gradlew atsArguments -q)" -f arguments.svg -c blue
+    - anybadge -l version -v "$(./gradlew version -q)" -f version.svg -c blue
+    - anybadge -l spigot -v "$(./gradlew spigotVersion -q)" -f spigot.svg -c blue
+    - anybadge -l atsArguments -v "$(./gradlew argumentsVersion -q)" -f arguments.svg -c blue
   artifacts:
     paths:
       - version.svg
