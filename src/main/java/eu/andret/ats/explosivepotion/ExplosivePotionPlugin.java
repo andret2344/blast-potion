@@ -1,6 +1,10 @@
 package eu.andret.ats.explosivepotion;
 
+import eu.andret.arguments.AnnotatedCommand;
+import eu.andret.arguments.CommandManager;
+import eu.andret.arguments.api.annotation.Fallback;
 import eu.andret.ats.explosivepotion.entity.Potion;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -22,21 +26,40 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ExplosivePotion extends JavaPlugin {
+public class ExplosivePotionPlugin extends JavaPlugin {
 	private final List<Potion> potions = new ArrayList<>();
 
 	@Override
 	public void onEnable() {
 		saveDefaultConfig();
+		setupConfig();
 		setUpListeners();
-		Optional.of(getConfig())
-				.map(config -> config.getList("potions"))
+		setupCommand();
+		new Metrics(this, 10681);
+	}
+
+	private void setupCommand() {
+		final AnnotatedCommand command = CommandManager.registerCommand(ExplosivePotionCommand.class, this);
+		command.getOptions().setAutoTranslateColors(true);
+		command.addTypeCompleter(Potion.class, () -> potions.stream().map(Potion::getName).collect(Collectors.toList()));
+		command.addArgumentMapper("potionMapper", Potion.class, name -> potions.stream().filter(x -> x.getName().equalsIgnoreCase(name)).findAny().orElse(null), Fallback.ON_NULL);
+	}
+
+	private void setupConfig() {
+		final ConfigurationSection potionsSection = getConfig().getConfigurationSection("potions");
+		if (potionsSection == null) {
+			return;
+		}
+
+		Optional.of(potionsSection)
+				.map(section -> section.getKeys(false))
 				.stream()
 				.flatMap(Collection::stream)
-				.map(section -> getConfig().createSection("current", (Map<?, ?>) section))
+				.map(potionsSection::getConfigurationSection)
+				.filter(Objects::nonNull)
 				.forEach(current -> {
-					ItemStack potion = new ItemStack(Material.SPLASH_POTION);
-					PotionMeta itemMeta = (PotionMeta) potion.getItemMeta();
+					final ItemStack potion = new ItemStack(Material.SPLASH_POTION);
+					final PotionMeta itemMeta = (PotionMeta) potion.getItemMeta();
 					if (itemMeta == null) {
 						return;
 					}
@@ -44,10 +67,10 @@ public class ExplosivePotion extends JavaPlugin {
 					itemMeta.setDisplayName(current.getString("item.name").replace('&', '\u00A7'));
 					itemMeta.setLore(current.getStringList("item.lore").stream().map(s -> s.replace('&', '\u00A7')).collect(Collectors.toList()));
 					potion.setItemMeta(itemMeta);
-					potions.add(new Potion(potion, current.getDouble("explosion-power")));
-					List<String> shape = current.getStringList("crafting.shape");
-					Map<Character, Material> mapping = new HashMap<>();
-					ConfigurationSection configurationSection = current.getConfigurationSection("crafting.mapping");
+					potions.add(new Potion(current.getName(), potion, current.getDouble("explosion-power")));
+					final List<String> shape = current.getStringList("crafting.shape");
+					final Map<Character, Material> mapping = new HashMap<>();
+					final ConfigurationSection configurationSection = current.getConfigurationSection("crafting.mapping");
 					Objects.requireNonNull(configurationSection).getKeys(false).forEach(key -> Optional.of(key)
 							.map(configurationSection::getString)
 							.map(Material::getMaterial)
@@ -56,14 +79,14 @@ public class ExplosivePotion extends JavaPlugin {
 				});
 	}
 
-	private void createRecipe(ItemStack target, List<String> shape, Map<Character, Material> mapping) {
-		ShapedRecipe recipe = new ShapedRecipe(createKey(target), target);
+	private void createRecipe(final ItemStack target, final List<String> shape, final Map<Character, Material> mapping) {
+		final ShapedRecipe recipe = new ShapedRecipe(createKey(target), target);
 		recipe.shape(shape.toArray(new String[]{}));
 		mapping.forEach(recipe::setIngredient);
 		getServer().addRecipe(recipe);
 	}
 
-	private NamespacedKey createKey(ItemStack itemStack) {
+	private NamespacedKey createKey(final ItemStack itemStack) {
 		return new NamespacedKey(
 				this,
 				Optional.of(itemStack)
@@ -80,7 +103,7 @@ public class ExplosivePotion extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ExplosivePotionListener(this), this);
 	}
 
-	Optional<Potion> getPotion(ThrownPotion thrownPotion) {
+	Optional<Potion> getPotion(final ThrownPotion thrownPotion) {
 		return potions.stream()
 				.filter(potion -> thrownPotion.getItem().equals(potion.getItemStack()))
 				.findFirst();

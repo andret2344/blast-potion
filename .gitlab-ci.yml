@@ -74,7 +74,7 @@ publish:
 jar:
   stage: deploy
   script:
-    - gradle build
+    - ./gradlew build
   artifacts:
     paths:
       - build/libs/*.jar
@@ -82,3 +82,19 @@ jar:
   cache:
     <<: *wrapper
     policy: pull
+
+badges:
+  stage: deploy
+  image: python
+  script:
+    - pip install anybadge
+    - anybadge -l version -v "$(./gradlew version -q)" -f version.svg -c blue
+    - anybadge -l spigot -v "$(./gradlew spigotVersion -q)" -f spigot.svg -c blue
+    - anybadge -l atsArguments -v "$(./gradlew argumentsVersion -q)" -f arguments.svg -c blue
+  artifacts:
+    paths:
+      - version.svg
+      - spigot.svg
+      - arguments.svg
+    when: always
+    expire_in: 4 weeks
