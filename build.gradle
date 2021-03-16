@@ -27,16 +27,18 @@ repositories {
 	mavenCentral()
 	mavenLocal()
 	spigot()
+	maven { url 'https://gitlab.com/api/v4/projects/12063927/packages/maven' }
 }
 
 dependencies {
-	compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.16.4-R0.1-SNAPSHOT'
+	compileOnly group: 'org.spigotmc', name: 'spigot-api', version: "${spigotVersion}-R0.1-SNAPSHOT"
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
 	compileOnly group: 'org.jetbrains', name: 'annotations', version: '20.1.0'
+	implementation group: 'eu.andret', name: 'ats-arguments', version: atsArguments
+	implementation group: 'org.bstats', name: 'bstats-bukkit', version: '2.2.1'
 	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
 
 	testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
-	testImplementation group: 'org.spigotmc', name: 'spigot-api', version: '1.16.4-R0.1-SNAPSHOT'
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.7.0'
 }
@@ -49,6 +51,13 @@ spigot {
 	apiVersion = '1.16'
 	description = 'A plugin that allows to craft the potion that explodes on a throw.'
 	version = project.version
+
+	//noinspection GroovyAssignabilityCheck
+	commands {
+		explosivePotion {
+			aliases = ['ep', 'potion']
+		}
+	}
 }
 
 test {
@@ -119,10 +128,11 @@ publishing {
 	}
 }
 
-
 shadowJar {
 	archiveFileName = "${project.name}-${project.version}.jar"
 	relocate 'org.json', 'eu.andret.ats.explosivepotion.json'
+	relocate 'eu.andret.arguments', 'eu.andret.ats.blockgenerator.arguments'
+	relocate 'org.bstats', 'eu.andret.ats.blockgenerator.bstats'
 	project.configurations.implementation.canBeResolved = true
 	configurations = [project.configurations.implementation]
 }
@@ -137,4 +147,22 @@ task delombok(type: DelombokTask, dependsOn: compileJava) {
 		args(it, '-d', outputDir)
 	}
 	doFirst { outputDir.deleteDir() }
+}
+
+tasks.register('spigot') {
+	doLast {
+		println(spigotVersion)
+	}
+}
+
+tasks.register('atsArguments') {
+	doLast {
+		println(atsArguments)
+	}
+}
+
+tasks.register('version') {
+	doLast {
+		println(version)
+	}
 }

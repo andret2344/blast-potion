@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 @Value
 public class Potion {
+	String name;
 	ItemStack itemStack;
 	double explosionPower;
 }

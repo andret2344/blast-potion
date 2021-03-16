@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class ExplosivePotionListener implements Listener {
-	private final ExplosivePotion plugin;
+	private final ExplosivePotionPlugin plugin;
 
 	@EventHandler
-	public void onPotionSplash(PotionSplashEvent event) {
+	public void onPotionSplash(final PotionSplashEvent event) {
 		Optional.of(event)
 				.map(PotionSplashEvent::getPotion)
 				.map(plugin::getPotion)
