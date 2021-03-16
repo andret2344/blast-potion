@@ -86,10 +86,9 @@ jar:
 badges:
   stage: deploy
   image: python
-  before_script:
-    - pip install anybadge
   script:
-    - eval spigot=$(./gradlew spigot -q)
+    - pip install anybadge
+    - spigot=$(./gradlew spigot -q)
     - arguments=$(./gradlew atsArguments -q)
     - version=$(./gradlew version -q)
   after_script:
