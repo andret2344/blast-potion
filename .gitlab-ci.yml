@@ -88,9 +88,10 @@ badges:
   dependencies:
     - junit
   script:
-    - apt-get update
-    - apt-get install python3 python3-pip --yes
+    - apt-get -qq update
+    - apt-get -qq install python3 python3-pip --yes
     - pip3 install anybadge
+    - ./gradlew build -q
     - anybadge -l version -v "$(./gradlew version -q)" -f version.svg -c "#007ec6"
     - anybadge -l spigot -v "$(./gradlew spigotVersion -q)" -f spigot.svg -c "#007ec6"
     - anybadge -l atsArguments -v "$(./gradlew argumentsVersion -q)" -f arguments.svg -c "#007ec6"
