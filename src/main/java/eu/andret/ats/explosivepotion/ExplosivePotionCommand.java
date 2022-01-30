@@ -3,10 +3,9 @@ package eu.andret.ats.explosivepotion;
 import eu.andret.arguments.AnnotatedCommandExecutor;
 import eu.andret.arguments.api.annotation.Argument;
 import eu.andret.arguments.api.annotation.BaseCommand;
-import eu.andret.arguments.api.annotation.Fallback;
-import eu.andret.arguments.api.annotation.Param;
+import eu.andret.arguments.api.annotation.TypeFallback;
 import eu.andret.arguments.api.entity.ExecutorType;
-import eu.andret.ats.explosivepotion.entity.Potion;
+import eu.andret.ats.explosivepotion.entity.ExplosivePotion;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -17,13 +16,13 @@ public class ExplosivePotionCommand extends AnnotatedCommandExecutor<ExplosivePo
 	}
 
 	@Argument(executorType = ExecutorType.PLAYER)
-	public String get(@Param("potionMapper") final Potion potion) {
-		((Player) sender).getInventory().addItem(potion.getItemStack());
-		return "&4Gave" + potion.getName();
+	public String get(final ExplosivePotion explosivePotion) {
+		((Player) sender).getInventory().addItem(explosivePotion.getItemStack());
+		return "&4Gave " + explosivePotion.getName();
 	}
 
-	@Fallback
-	public String get(final String ignored, final String potion) {
+	@TypeFallback(ExplosivePotion.class)
+	public String potionFallback(final String potion) {
 		return "&cNo \"" + potion + "\" exists!";
 	}
 }
