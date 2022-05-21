@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ExplosivePotionPlugin extends JavaPlugin {
 	@NotNull
@@ -43,7 +42,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 	private void setupCommand() {
 		final AnnotatedCommand<ExplosivePotionPlugin> command = CommandManager.registerCommand(ExplosivePotionCommand.class, this);
 		command.getOptions().setAutoTranslateColors(true);
-		command.addTypeCompleter(ExplosivePotion.class, () -> explosivePotions.stream().map(ExplosivePotion::getName).collect(Collectors.toList()));
+		command.addTypeCompleter(ExplosivePotion.class, () -> explosivePotions.stream().map(ExplosivePotion::getName).toList());
 		command.addTypeMapper(ExplosivePotion.class, name -> explosivePotions.stream()
 						.filter(x -> x.getName().equalsIgnoreCase(name))
 						.findAny()
@@ -71,7 +70,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 					}
 					itemMeta.setBasePotionData(new PotionData(PotionType.UNCRAFTABLE, false, false));
 					itemMeta.setDisplayName(String.valueOf(current.getString("item.name")).replace('&', '\u00A7'));
-					itemMeta.setLore(current.getStringList("item.lore").stream().map(s -> s.replace('&', '\u00A7')).collect(Collectors.toList()));
+					itemMeta.setLore(current.getStringList("item.lore").stream().map(s -> s.replace('&', '\u00A7')).toList());
 					potion.setItemMeta(itemMeta);
 					explosivePotions.add(new ExplosivePotion(current.getName(), potion, current.getDouble("explosion-power")));
 					final List<String> shape = current.getStringList("crafting.shape");
@@ -103,7 +102,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 						.map(ItemMeta::getDisplayName)
 						.map(String::toLowerCase)
 						.map(name -> name.replaceAll("\\u00A7[\\da-f]", ""))
-						.map(name -> name.replaceAll("[^a-z0-9/._-]", ""))
+						.map(name -> name.replaceAll("[^a-z\\d/._-]", ""))
 						.orElse(getDescription().getFullName())
 		);
 	}

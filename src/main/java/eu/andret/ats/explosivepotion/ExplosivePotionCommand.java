@@ -15,7 +15,7 @@ public class ExplosivePotionCommand extends AnnotatedCommandExecutor<ExplosivePo
 		super(sender, plugin);
 	}
 
-	@Argument(executorType = ExecutorType.PLAYER)
+	@Argument(executorType = ExecutorType.PLAYER, permission = "ats.explosivepotion.get")
 	public String get(final ExplosivePotion explosivePotion) {
 		((Player) sender).getInventory().addItem(explosivePotion.getItemStack());
 		return "&4Gave " + explosivePotion.getName();
