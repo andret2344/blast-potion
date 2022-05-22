@@ -9,4 +9,5 @@
       </configuration>
     </facet>
   </component>
+  <component name="TestModuleProperties" production-module="atsExplosivePotion.main" />
 </module>
