@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 class ExplosivePotionCommandTest {
 	@Test
 	void getPotion() {
+		// given
 		final ExplosivePotionPlugin explosivePotionPlugin = mock(ExplosivePotionPlugin.class);
 		final Player sender = mock(Player.class);
 		final ExplosivePotionCommand explosivePotionCommand = new ExplosivePotionCommand(sender, explosivePotionPlugin);
@@ -37,6 +38,7 @@ class ExplosivePotionCommandTest {
 
 	@Test
 	void fallbackPotion() {
+		// given
 		final ExplosivePotionPlugin explosivePotionPlugin = mock(ExplosivePotionPlugin.class);
 		final Player sender = mock(Player.class);
 		final ExplosivePotionCommand explosivePotionCommand = new ExplosivePotionCommand(sender, explosivePotionPlugin);
