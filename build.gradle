@@ -79,9 +79,7 @@ jacocoTestReport {
 	reports.xml.required = true
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
-			fileTree(dir: it,
-					exclude: ['**/*Plugin.class']
-			)
+			fileTree(dir: it, exclude: ['**/*Plugin.class'])
 		}))
 	}
 }
@@ -93,6 +91,12 @@ jacocoTestCoverageVerification {
 				minimum = 1
 			}
 		}
+	}
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: ['**/*Plugin.*'])
+		}))
 	}
 }
 
