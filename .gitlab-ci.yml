@@ -55,7 +55,7 @@ junit:
     reports:
       junit: build/test-results/test/**.xml
     paths:
-      - build/test-results/test/**.xml
+      - build/reports/jacoco/test/html
   cache:
     <<: *wrapper
     policy: pull
