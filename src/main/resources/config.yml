@@ -1,5 +1,5 @@
 potions:
-  throwableTNT:
+  throwable-tnt:
     explosion-power: 3.25
     item:
       name: '&5Throwable TNT'
