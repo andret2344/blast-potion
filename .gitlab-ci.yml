@@ -54,6 +54,8 @@ junit:
   artifacts:
     reports:
       junit: build/test-results/test/**.xml
+    paths:
+      - build/test-results/test/**.xml
   cache:
     <<: *wrapper
     policy: pull
