@@ -52,7 +52,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 	}
 
 	private void setupConfig() {
-		final ConfigurationSection potionsSection = getConfig().getConfigurationSection("explosivePotions");
+		final ConfigurationSection potionsSection = getConfig().getConfigurationSection("potions");
 		if (potionsSection == null) {
 			return;
 		}
@@ -89,7 +89,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 							  @NotNull final List<String> shape,
 							  @NotNull final Map<Character, Material> mapping) {
 		final ShapedRecipe recipe = new ShapedRecipe(createKey(target), target);
-		recipe.shape(shape.toArray(new String[]{}));
+		recipe.shape(shape.toArray(new String[0]));
 		mapping.forEach(recipe::setIngredient);
 		getServer().addRecipe(recipe);
 	}
