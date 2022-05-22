@@ -5,6 +5,7 @@ import eu.andret.arguments.CommandManager;
 import eu.andret.arguments.api.entity.FallbackConstants;
 import eu.andret.ats.explosivepotion.entity.ExplosivePotion;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -44,7 +45,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 		command.getOptions().setAutoTranslateColors(true);
 		command.addTypeCompleter(ExplosivePotion.class, () -> explosivePotions.stream().map(ExplosivePotion::getName).toList());
 		command.addTypeMapper(ExplosivePotion.class, name -> explosivePotions.stream()
-						.filter(x -> x.getName().equalsIgnoreCase(name))
+						.filter(potion -> potion.getName().equalsIgnoreCase(name))
 						.findAny()
 						.orElse(null),
 				FallbackConstants.ON_NULL);
@@ -69,8 +70,8 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 						return;
 					}
 					itemMeta.setBasePotionData(new PotionData(PotionType.UNCRAFTABLE, false, false));
-					itemMeta.setDisplayName(String.valueOf(current.getString("item.name")).replace('&', '\u00A7'));
-					itemMeta.setLore(current.getStringList("item.lore").stream().map(s -> s.replace('&', '\u00A7')).toList());
+					itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', current.getString("item.name", "unnamed potion")));
+					itemMeta.setLore(current.getStringList("item.lore").stream().map(line -> ChatColor.translateAlternateColorCodes('&', line)).toList());
 					potion.setItemMeta(itemMeta);
 					explosivePotions.add(new ExplosivePotion(current.getName(), potion, current.getDouble("explosion-power")));
 					final List<String> shape = current.getStringList("crafting.shape");
