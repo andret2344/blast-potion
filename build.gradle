@@ -31,7 +31,7 @@ dependencies {
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 	compileOnly group: 'org.spigotmc', name: 'spigot-api', version: "${spigotVersion}-R0.1-SNAPSHOT"
 	implementation group: 'eu.andret', name: 'ats-arguments', version: argumentsVersion
-	implementation group: 'org.bstats', name: 'bstats-bukkit', version: '2.2.1'
+	implementation group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.0'
 	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 
 	testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
@@ -53,11 +53,11 @@ spigot {
 	description = 'A plugin that allows to craft the potion that explodes on a throw.'
 	version = project.version
 	website = 'https://www.spigotmc.org/resources/atsexplosivepotion-craft-throwable-potion-that-explodes.96224/'
-	libraries = ['org.bstats:bstats-bukkit:2.2.1']
+	libraries = ['org.jetbrains:annotations:23.0.0']
 
 	commands {
 		explosivePotion {
-			aliases = ['ep', 'potion']
+			aliases = ['ep']
 		}
 	}
 
@@ -151,8 +151,8 @@ publishing {
 
 shadowJar {
 	archiveFileName = "${project.name}-${project.version}.jar"
-	relocate 'eu.andret.arguments', 'eu.andret.ats.blockgenerator.arguments'
-	relocate 'org.bstats', 'eu.andret.ats.blockgenerator.bstats'
+	relocate 'eu.andret.arguments', 'eu.andret.ats.explosivepotion.arguments'
+	relocate 'org.bstats', 'eu.andret.ats.explosivepotion.bstats'
 	project.configurations.implementation.canBeResolved = true
 	configurations = [project.configurations.implementation]
 }
@@ -178,11 +178,5 @@ tasks.register('spigotVersion') {
 tasks.register('argumentsVersion') {
 	doLast {
 		println(argumentsVersion)
-	}
-}
-
-tasks.register('version') {
-	doLast {
-		println(version)
 	}
 }
