@@ -32,17 +32,6 @@ compile:
     <<: *wrapper
     policy: pull
 
-delombok:
-  stage: build
-  script:
-    - ./gradlew delombok
-  artifacts:
-    paths:
-      - build/delombok/**
-  cache:
-    <<: *wrapper
-    policy: pull
-
 junit:
   stage: verify
   dependencies:

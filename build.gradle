@@ -1,14 +1,7 @@
-import io.franzbecker.gradle.lombok.task.DelombokTask
-
-buildscript {
-	dependencies { classpath 'io.franzbecker:gradle-lombok:2.0' }
-}
-
 plugins {
 	id 'de.jansauer.printcoverage' version '2.0.0'
 	id 'com.github.johnrengelman.shadow' version '7.1.2'
 	id 'kr.entree.spigradle' version '2.3.4'
-	id 'io.franzbecker.gradle-lombok' version '5.0.0'
 }
 
 apply plugin: 'idea'
@@ -158,16 +151,6 @@ shadowJar {
 }
 
 build.dependsOn(shadowJar)
-
-task delombok(type: DelombokTask, dependsOn: compileJava) {
-	ext.outputDir = file("$buildDir/delombok")
-	outputs.dir(outputDir)
-	sourceSets.main.java.srcDirs.each {
-		inputs.dir(it)
-		args(it, '-d', outputDir)
-	}
-	doFirst { outputDir.deleteDir() }
-}
 
 tasks.register('spigotVersion') {
 	doLast {
