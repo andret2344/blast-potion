@@ -32,7 +32,7 @@ compile:
     <<: *wrapper
     policy: pull
 
-junit:
+testng:
   stage: verify
   dependencies:
     - compile
