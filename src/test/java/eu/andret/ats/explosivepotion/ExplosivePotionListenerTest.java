@@ -7,7 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class ExplosivePotionListenerTest {
+public class ExplosivePotionListenerTest {
 	@Test
 	void thrownExplosivePotion() {
 		// given
@@ -33,7 +33,7 @@ class ExplosivePotionListenerTest {
 		when(thrownPotion.getLocation()).thenReturn(location);
 		when(location.getWorld()).thenReturn(world);
 
-		// when 
+		// when
 		explosivePotionListener.onPotionSplash(potionSplashEvent);
 
 		// then

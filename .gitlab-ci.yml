@@ -32,7 +32,7 @@ compile:
     <<: *wrapper
     policy: pull
 
-junit:
+testng:
   stage: verify
   dependencies:
     - compile
@@ -77,7 +77,7 @@ jar:
 badges:
   stage: deploy
   dependencies:
-    - junit
+    - testng
   script:
     - apt-get -qq update
     - apt-get -qq install python3 python3-pip --yes
@@ -99,7 +99,7 @@ badges:
 pages:
   stage: deploy
   dependencies:
-    - junit
+    - testng
   script:
     - mv build/reports/jacoco/test/html/ public/
   artifacts:

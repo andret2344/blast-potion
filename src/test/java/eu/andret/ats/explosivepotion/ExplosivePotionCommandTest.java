@@ -5,9 +5,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-class ExplosivePotionCommandTest {
+public class ExplosivePotionCommandTest {
 	@Test
 	void getPotion() {
 		// given
@@ -31,7 +31,7 @@ class ExplosivePotionCommandTest {
 		final String result = explosivePotionCommand.get(explosivePotion);
 
 		// then
-		assertEquals("&4Gave test", result);
+		assertThat(result).isEqualTo("&4Gave test");
 		verify(inventory, times(1)).addItem(itemStack);
 		verifyNoMoreInteractions(inventory);
 	}
@@ -49,7 +49,7 @@ class ExplosivePotionCommandTest {
 		final String result = explosivePotionCommand.potionFallback("test");
 
 		// then
-		assertEquals("&cNo \"test\" exists!", result);
+		assertThat(result).isEqualTo("&cNo \"test\" exists!");
 		verifyNoInteractions(inventory);
 	}
 }
