@@ -10,5 +10,10 @@
 /gradle.xml
 /discord.xml
 /compiler.xml
+/intellij-javadocs-4.0.1.xml
+/jpa-buddy.xml
+/jarRepositories.xml
+/misc.xml
+/uiDesigner.xml
 
 /sonarlint/
