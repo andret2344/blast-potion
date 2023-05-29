@@ -27,7 +27,7 @@ public class ExplosivePotionListener implements Listener {
 								.map(Location::getWorld)
 								.ifPresent(world -> {
 									event.setCancelled(true);
-									world.createExplosion(location, (float) potion.getExplosionPower());
+									world.createExplosion(location, (float) potion.explosionPower());
 								})));
 	}
 }
