@@ -21,19 +21,15 @@ repositories {
 
 dependencies {
 	compileOnly group: 'org.jetbrains', name: 'annotations', version: '24.0.1'
-	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
 	compileOnly group: 'org.spigotmc', name: 'spigot-api', version: "${spigotVersion}-R0.1-SNAPSHOT"
 	implementation group: 'eu.andret', name: 'ats-arguments', version: argumentsVersion
 	implementation group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
-	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 
-	testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
 	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
 	testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.3.1'
 	testImplementation group: 'org.mockito', name: 'mockito-inline', version: '5.2.0'
 	testImplementation group: 'org.spigotmc', name: 'spigot-api', version: "${spigotVersion}-R0.1-SNAPSHOT"
 	testImplementation group: 'org.testng', name: 'testng', version: '7.8.0'
-	testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 }
 
 compileJava.options.compilerArgs << '-parameters' << '-g' << '-Xlint:deprecation' << '-Xlint:unchecked'
@@ -45,7 +41,7 @@ spigot {
 	description = 'A plugin that allows to craft the potion that explodes on a throw.'
 	version = project.version
 	website = 'https://www.spigotmc.org/resources/atsexplosivepotion-craft-throwable-potion-that-explodes.96224/'
-	libraries = ['org.jetbrains:annotations:23.0.0']
+	libraries = ['org.jetbrains:annotations:24.0.1']
 
 	commands {
 		explosivePotion {
@@ -100,7 +96,7 @@ javadoc {
 		setMemberLevel JavadocMemberLevel.PUBLIC
 		setAuthor true
 
-		links 'https://docs.oracle.com/en/java/javase/11/docs/api/'
+		links 'https://docs.oracle.com/en/java/javase/17/docs/api/'
 	}
 }
 
@@ -129,6 +125,7 @@ publishing {
 	repositories {
 		maven {
 			url 'https://gitlab.com/api/v4/projects/6382752/packages/maven'
+			//noinspection GroovyAssignabilityCheck
 			credentials(HttpHeaderCredentials) {
 				name = 'Job-Token'
 				value = System.getenv('CI_JOB_TOKEN')

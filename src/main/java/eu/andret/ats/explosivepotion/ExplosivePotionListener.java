@@ -1,6 +1,5 @@
 package eu.andret.ats.explosivepotion;
 
-import lombok.AllArgsConstructor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
@@ -10,10 +9,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-@AllArgsConstructor
 public class ExplosivePotionListener implements Listener {
 	@NotNull
 	private final ExplosivePotionPlugin plugin;
+
+	public ExplosivePotionListener(@NotNull final ExplosivePotionPlugin plugin) {
+		this.plugin = plugin;
+	}
 
 	@EventHandler
 	public void onPotionSplash(final PotionSplashEvent event) {
