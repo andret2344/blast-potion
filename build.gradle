@@ -64,7 +64,6 @@ test {
 }
 
 jacocoTestReport {
-	reports.xml.required = true
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it, exclude: ['**/*Plugin.class'])
@@ -93,10 +92,9 @@ javadoc {
 	classpath = configurations.compileClasspath
 
 	options {
-		setMemberLevel JavadocMemberLevel.PUBLIC
-		setAuthor true
-
-		links 'https://docs.oracle.com/en/java/javase/17/docs/api/'
+		memberLevel = JavadocMemberLevel.PUBLIC
+		author = true
+		links = ['https://docs.oracle.com/en/java/javase/17/docs/api/']
 	}
 }
 
@@ -138,16 +136,10 @@ publishing {
 	}
 }
 
-configurations {
-	resolvableImplementation.extendsFrom(implementation)
-	resolvableImplementation.canBeResolved = true
-}
-
 shadowJar {
 	archiveFileName = "${project.name}-${project.version}.jar"
 	relocate 'eu.andret.arguments', 'eu.andret.ats.explosivepotion.arguments'
 	relocate 'org.bstats', 'eu.andret.ats.explosivepotion.bstats'
-	configurations = [project.configurations.resolvableImplementation]
 }
 
 build.dependsOn(shadowJar)
