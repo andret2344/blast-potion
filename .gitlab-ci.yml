@@ -51,7 +51,7 @@ jar:
 badges:
   stage: deploy
   dependencies:
-    - testng
+    - unit
   script:
     - apt-get -qq update
     - apt-get -qq install python3 python3-pip --yes
