@@ -50,8 +50,6 @@ jar:
 
 badges:
   stage: deploy
-  dependencies:
-    - unit
   script:
     - apt-get -qq update
     - apt-get -qq install python3 python3-pip --yes
@@ -64,7 +62,6 @@ badges:
       - spigot.svg
       - arguments.svg
     when: always
-    expire_in: 4 weeks
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: manual
@@ -73,7 +70,7 @@ badges:
 pages:
   stage: deploy
   dependencies:
-    - testng
+    - unit
   script:
     - mv build/reports/jacoco/jacocoAggregatedReport/html/ public/
   artifacts:
