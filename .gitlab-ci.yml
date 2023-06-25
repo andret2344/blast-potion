@@ -10,15 +10,9 @@ before_script:
   - chmod a+x gradlew
 
 stages:
-  - prepare
   - build
   - verify
   - deploy
-
-wrapper:
-  stage: prepare
-  script:
-    - gradle wrapper
 
 compile:
   stage: build
@@ -38,8 +32,7 @@ testng:
     - compile
   script:
     - ./gradlew test
-  coverage: '/^Coverage:\s(\d+\.\d+%)/'
-  when: on_success
+  coverage: '/    - Instruction Coverage: ([0-9.]+)%/'
   artifacts:
     reports:
       junit: build/test-results/test/**.xml

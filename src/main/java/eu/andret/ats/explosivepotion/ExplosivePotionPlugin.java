@@ -43,9 +43,9 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 	private void setupCommand() {
 		final AnnotatedCommand<ExplosivePotionPlugin> command = CommandManager.registerCommand(ExplosivePotionCommand.class, this);
 		command.getOptions().setAutoTranslateColors(true);
-		command.addTypeCompleter(ExplosivePotion.class, () -> explosivePotions.stream().map(ExplosivePotion::getName).toList());
+		command.addTypeCompleter(ExplosivePotion.class, () -> explosivePotions.stream().map(ExplosivePotion::name).toList());
 		command.addTypeMapper(ExplosivePotion.class, name -> explosivePotions.stream()
-						.filter(potion -> potion.getName().equalsIgnoreCase(name))
+						.filter(potion -> potion.name().equalsIgnoreCase(name))
 						.findAny()
 						.orElse(null),
 				FallbackConstants.ON_NULL);
@@ -115,7 +115,7 @@ public class ExplosivePotionPlugin extends JavaPlugin {
 	@NotNull
 	public Optional<ExplosivePotion> getExplosivePotion(@NotNull final ThrownPotion thrownPotion) {
 		return explosivePotions.stream()
-				.filter(explosivePotion -> thrownPotion.getItem().equals(explosivePotion.getItemStack()))
+				.filter(explosivePotion -> thrownPotion.getItem().equals(explosivePotion.itemStack()))
 				.findFirst();
 	}
 }
