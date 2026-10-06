@@ -5,7 +5,7 @@
       <list>
         <IssueNavigationLink>
           <option name="issueRegexp" value="#(\d+)" />
-          <option name="linkRegexp" value="https://gitlab.com/andret-tools-system/spigot/ats-explosive-potion/-/issues/$1" />
+          <option name="linkRegexp" value="https://gitlab.com/andret-tools-system/spigot/ats-block-generator/-/issues/$1" />
         </IssueNavigationLink>
       </list>
     </option>

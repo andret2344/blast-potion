@@ -1,11 +1,15 @@
+# Names and lore use the MiniMessage format: https://docs.papermc.io/adventure/minimessage/format/
+
 potions:
   throwable-tnt:
+    # The power of the explosion, where 4 is TNT
     explosion-power: 3.25
     item:
-      name: '&5Throwable TNT'
+      name: '<dark_purple>Throwable TNT'
       lore:
-        - '&2Throw it'
-        - '&2to explode!'
+        - '<dark_green>Throw it'
+        - '<dark_green>to explode!'
+    # Optional - without it the potion can only be given with the command
     crafting:
       shape:
         - 'NGN'

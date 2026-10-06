@@ -1,0 +1,24 @@
+name: BlastPotion
+main: eu.andret.blastpotion.BlastPotionPlugin
+version: ${version}
+author: Andret
+api-version: '26.2'
+description: Craftable splash potions that explode where they land.
+website: https://github.com/andret2344/blast-potion
+
+permissions:
+  blastpotion.*:
+    description: Grants access to all BlastPotion commands.
+    children:
+      blastpotion.get: true
+      blastpotion.give: true
+      blastpotion.reload: true
+  blastpotion.get:
+    description: Allows to get blast potions with the command.
+    default: op
+  blastpotion.give:
+    description: Allows to give blast potions to other players with the command.
+    default: op
+  blastpotion.reload:
+    description: Allows to reload the config.
+    default: op
