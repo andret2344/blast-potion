@@ -37,7 +37,7 @@ public class BlastPotionPlugin extends JavaPlugin {
 		applyPotions(configLoader.loadPotions(getConfig()));
 		getServer().getPluginManager().registerEvents(new BlastPotionListener(this), this);
 		setUpCommand();
-		new Metrics(this, 10681);
+		new Metrics(this, 34537);
 	}
 
 	@Override

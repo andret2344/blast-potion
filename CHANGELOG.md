@@ -2,8 +2,6 @@
 
 ## Unreleased
 
-## 1.0.0 - 2026-10-06
-
 BlastPotion is the successor of atsExplosivePotion 2.4.4. The changes below are relative to it.
 
 ### Added
@@ -25,13 +23,16 @@ BlastPotion is the successor of atsExplosivePotion 2.4.4. The changes below are 
 - Potions made by atsExplosivePotion are not recognized and splash like regular potions without effects.
 - Requires Paper (or a fork such as Purpur) 26.2 or newer and Java 25. Spigot is no longer supported.
 - Names and lore in `config.yml` use the [MiniMessage](https://docs.papermc.io/adventure/minimessage/format/) format,
-  e.g. `<dark_purple>Throwable TNT` instead of `&5Throwable TNT`. Names are no longer italic. A potion without a name keeps the name of the game instead of "unnamed potion".
+  e.g. `<dark_purple>Throwable TNT` instead of `&5Throwable TNT`. Names are no longer italic. A potion without a name
+  keeps the name of the game instead of "unnamed potion".
 - The explosion counts as caused by the player who threw the potion.
 - Potions glow without carrying a hidden Infinity enchantment.
 - The recipe of a potion is named after the potion in the config instead of its display name.
 - Commands are handled by Lamp. `/bpot` alone lists the subcommands with a description for each.
 - The plugin is licensed under the Apache License 2.0. Redistributions have to keep the `NOTICE` file, which the jar
   carries as `META-INF/NOTICE-blast-potion`.
+- Usage statistics are sent to the new [BlastPotion page on bStats](https://bstats.org/plugin/bukkit/BlastPotion/34537)
+  instead of the one of atsExplosivePotion.
 
 ### Removed
 

@@ -109,7 +109,7 @@ requires at least 80% test coverage.
 
 ## Metrics
 
-BlastPotion sends anonymous usage statistics to [bStats](https://bstats.org/plugin/bukkit/atsExplosivePotion/10681).
+BlastPotion sends anonymous usage statistics to [bStats](https://bstats.org/plugin/bukkit/BlastPotion/34537).
 They can be turned off for all plugins in `plugins/bStats/config.yml`.
 
 ## License
