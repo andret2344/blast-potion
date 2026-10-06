@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.0.0 - 2026-10-06
+
 BlastPotion is the successor of atsExplosivePotion 2.4.4. The changes below are relative to it.
 
 ### Added
